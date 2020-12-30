@@ -35,7 +35,7 @@ public class PieceRenderer {
         {-4*M,-4*M},{-3*M,-4*M},{-2*M,-4*M},{-1*M,-4*M},{0*M,-4*M},{1*M,-4*M},{2*M,-4*M},{3*M,-4*M},{4*M,-4*M},
     };
 
-    public void Render(GameObject board, GameObject piece, int col, int row, int type) {
+    public void Render(GameObject board, GameObject piece, int col, int row, int type, bool is_white=false) {
         int idx = (row - 1) * 9 + (9 - col);
         float x = POSITIONS[idx, COL];
         float y = POSITIONS[idx, ROW];
@@ -49,6 +49,8 @@ public class PieceRenderer {
         Debug.Log(y);
 
         piece.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(PIECE_IMG_DIR + piece_names[type]);
+        if (is_white)
+            piece.transform.Rotate(new Vector3(180.0f, 180.0f, 0.0f));
     }
 
     public void RenderSfen() {

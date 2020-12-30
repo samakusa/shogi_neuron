@@ -7,6 +7,7 @@ public class BoardScene : MonoBehaviour {
     public GameObject piecePrefab;
 
     private PieceRenderer PieceRenderer = new PieceRenderer();
+    private List<GameObject> Pieces;
     private string begin_board_sfen = "lnsgkgsnl/1r5b1/ppppppppp/9/9/9/PPPPPPPPP/1B5R1/LNSGKGSNL b -";
 
     private enum piece_types {
@@ -38,6 +39,8 @@ public class BoardScene : MonoBehaviour {
         this.PieceRenderer.Render(this.onBoard, piece10, 8, 8, (int)piece_types.BISHOP);
         GameObject piece11 = (GameObject)Instantiate(this.piecePrefab);
         this.PieceRenderer.Render(this.onBoard, piece11, 2, 8, (int)piece_types.ROOK);
+        GameObject piece12 = (GameObject)Instantiate(this.piecePrefab);
+        this.PieceRenderer.Render(this.onBoard, piece12, 8, 2, (int)piece_types.ROOK, true);
     }
 
     // Update is called once per frame
