@@ -329,6 +329,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   onBoard: {fileID: 1629051348}
+  handR: {fileID: 1651531139}
+  handL: {fileID: 531842360}
   piecePrefab: {fileID: 4214070710549475123, guid: a87b532c85275e94d8f421215923040f,
     type: 3}
 --- !u!1 &1629051348
