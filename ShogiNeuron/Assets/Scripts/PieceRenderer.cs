@@ -66,19 +66,22 @@ public class PieceRenderer {
         { 0.0f, 0*HM },
     };  // Hand_X base
 
-
     public void Render(GameObject board, GameObject piecePrefab, int col, int row, piece_types type, turn turn) {
         int idx = (row - 1) * 9 + (9 - col);
         Render(board, piecePrefab, idx, type, turn);
     }
 
     public void Render(GameObject base_obj, GameObject piecePrefab, int idx, piece_types type, turn turn) {
-        GameObject piece = Object.Instantiate(piecePrefab);
         float x = idx != IDX_HAND ? POSITIONS[idx, COL] : HAND_POSITIONS[(int)type, X];;
         float y = idx != IDX_HAND ? POSITIONS[idx, ROW] : (turn == turn.BLACK ? 1 : -1) * HAND_POSITIONS[(int)type, Y];
         float scale_x = idx != IDX_HAND ? SCALE_X : HAND_SCALE_X;
         float scale_y = idx != IDX_HAND ? SCALE_Y : HAND_SCALE_Y;
 
+        Render(base_obj, piecePrefab, x, y, scale_x, scale_y, type, turn);
+    }
+
+    public void Render(GameObject base_obj, GameObject piecePrefab, float x, float y, float scale_x, float scale_y, piece_types type, turn turn) {
+        GameObject piece = Object.Instantiate(piecePrefab);
         piece.transform.SetParent(base_obj.transform, false);
         piece.transform.localPosition = new Vector3(x, y);
         piece.transform.localScale = new Vector3(scale_x, scale_y);
@@ -97,7 +100,6 @@ public class PieceRenderer {
             int i;
             p += c;
 
-            Debug.Log(p);
             if (int.TryParse(p, out i)) {
                 idx += i;
                 p = "";
