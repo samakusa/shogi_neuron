@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PieceRenderer {
     public enum piece_types {
@@ -49,34 +50,11 @@ public class PieceRenderer {
         {-4*M,-4*M},{-3*M,-4*M},{-2*M,-4*M},{-1*M,-4*M},{0*M,-4*M},{1*M,-4*M},{2*M,-4*M},{3*M,-4*M},{4*M,-4*M},
     };  // OnBoard base
 
-    private int IDX_HAND = -1;
-    private const float HAND_SCALE_X = 0.3f;
-    private const float HAND_SCALE_Y = 0.03f;
-    private const float HM = 0.11f; // hand margin
-    private const int X = 0; // index
-    private const int Y = 1; // index
-    private float[,] HAND_POSITIONS = {
-        { 0.0f, 0.0f },
-        { 0.0f, -4*HM },
-        { 0.0f, -3*HM },
-        { 0.0f, -2*HM },
-        { 0.0f, -1*HM },
-        { 0.0f, 1*HM },
-        { 0.0f, 2*HM },
-        { 0.0f, 0*HM },
-    };  // Hand_X base
-
-    public void Render(GameObject board, GameObject piecePrefab, int col, int row, piece_types type, turn turn) {
-        int idx = (row - 1) * 9 + (9 - col);
-        Render(board, piecePrefab, idx, type, turn);
-    }
-
     public void Render(GameObject base_obj, GameObject piecePrefab, int idx, piece_types type, turn turn) {
-        float x = idx != IDX_HAND ? POSITIONS[idx, COL] : HAND_POSITIONS[(int)type, X];;
-        float y = idx != IDX_HAND ? POSITIONS[idx, ROW] : (turn == turn.BLACK ? 1 : -1) * HAND_POSITIONS[(int)type, Y];
-        float scale_x = idx != IDX_HAND ? SCALE_X : HAND_SCALE_X;
-        float scale_y = idx != IDX_HAND ? SCALE_Y : HAND_SCALE_Y;
-
+        float x = POSITIONS[idx, COL];
+        float y = POSITIONS[idx, ROW];
+        float scale_x = SCALE_X;
+        float scale_y = SCALE_Y;
         Render(base_obj, piecePrefab, x, y, scale_x, scale_y, type, turn);
     }
 
@@ -89,6 +67,24 @@ public class PieceRenderer {
         piece.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(PIECE_IMG_DIR + piece_names[(int)type]);
         if (turn == turn.WHITE)
             piece.transform.Rotate(new Vector3(180.0f, 180.0f, 0.0f));
+    }
+
+    public void AddHand(GameObject[] pieces, piece_types type) {
+        GameObject piece = pieces[(int)type];
+        Text text = piece.GetComponentInChildren<Text>();
+        int c = -1; int.TryParse(text.text, out c); // Assert(c != -1)
+        if (c == 0)
+            piece.SetActive(true);
+        text.text = (c + 1).ToString();
+    }
+
+    public void SubHand(GameObject[] pieces, piece_types type) {    // substitute
+        GameObject piece = pieces[(int)type];
+        Text text = piece.GetComponentInChildren<Text>();
+        int c = -1; int.TryParse(text.text, out c); // Assert(c != -1)
+        text.text = (c - 1).ToString(); // Assert(c - 1 >= 0)
+        if (c - 1 == 0)
+            piece.SetActive(false);
     }
 
     public void RenderSfen(GameObject board, GameObject piecePrefab, string sfen, List<GameObject> pieces) {

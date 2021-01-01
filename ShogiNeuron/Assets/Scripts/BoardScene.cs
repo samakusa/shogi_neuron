@@ -16,10 +16,11 @@ public class BoardScene : MonoBehaviour {
     // Start is called before the first frame update
     void Start() {
         PieceRenderer.RenderSfen(this.onBoard, this.piecePrefab, this.begin_board_sfen, this.Pieces);
-        GameObject handPiece = BlackHandPieces[(int)PieceRenderer.piece_types.PORN];
-        handPiece.SetActive(true);
-        Text text = handPiece.GetComponentsInChildren<Text>()[0];
-        text.text = "9";
+        PieceRenderer.AddHand(BlackHandPieces, PieceRenderer.piece_types.PORN);
+        PieceRenderer.AddHand(WhiteHandPieces, PieceRenderer.piece_types.LANCE);
+        PieceRenderer.AddHand(WhiteHandPieces, PieceRenderer.piece_types.LANCE);
+        PieceRenderer.SubHand(BlackHandPieces, PieceRenderer.piece_types.PORN);
+        PieceRenderer.SubHand(WhiteHandPieces, PieceRenderer.piece_types.LANCE);
     }
 
     // Update is called once per frame
