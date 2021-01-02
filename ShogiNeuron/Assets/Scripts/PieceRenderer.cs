@@ -33,9 +33,9 @@ public class PieceRenderer {
         WHITE,
     }
 
-    private const float SCALE_X = 0.00125f;
-    private const float SCALE_Y = 0.00125f;
-    private const float M = 0.39f;  // margin
+    private const float SCALE_X = 0.2f;
+    private const float SCALE_Y = 0.2f;
+    private const float M = 63.0f;  // margin
     private const int COL = 0;  // index
     private const int ROW = 1;  // index
     private float[,] POSITIONS = {
