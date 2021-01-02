@@ -13,6 +13,8 @@ public class BoardScene : MonoBehaviour {
     private List<GameObject> Pieces = new List<GameObject>();
     private string begin_board_sfen = "lnsgkgsnl/1r5b1/ppppppppp/9/9/9/PPPPPPPPP/1B5R1/LNSGKGSNL b -";
 
+    private bool IsPieceSelected = false;
+
     // Start is called before the first frame update
     void Start() {
         PieceRenderer.RenderSfen(this.onBoard, this.piecePrefab, this.begin_board_sfen, this.Pieces);

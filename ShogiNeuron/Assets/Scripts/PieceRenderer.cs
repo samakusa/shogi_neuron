@@ -33,8 +33,8 @@ public class PieceRenderer {
         WHITE,
     }
 
-    private const float SCALE_X = 0.125f;
-    private const float SCALE_Y = 0.125f;
+    private const float SCALE_X = 0.00125f;
+    private const float SCALE_Y = 0.00125f;
     private const float M = 0.39f;  // margin
     private const int COL = 0;  // index
     private const int ROW = 1;  // index
@@ -64,7 +64,7 @@ public class PieceRenderer {
         piece.transform.localPosition = new Vector3(x, y);
         piece.transform.localScale = new Vector3(scale_x, scale_y);
 
-        piece.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(PIECE_IMG_DIR + piece_names[(int)type]);
+        piece.GetComponent<Image>().sprite = Resources.Load<Sprite>(PIECE_IMG_DIR + piece_names[(int)type]);
         if (turn == turn.WHITE)
             piece.transform.Rotate(new Vector3(180.0f, 180.0f, 0.0f));
     }
