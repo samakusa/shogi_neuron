@@ -38,6 +38,7 @@ public class PieceRenderer {
     private const float M = 63.0f;  // margin
     private const int COL = 0;  // index
     private const int ROW = 1;  // index
+    private const int MAX_IDX = 80;
     private float[,] POSITIONS = {
         {-4*M, 4*M},{-3*M, 4*M},{-2*M, 4*M},{-1*M, 4*M},{0*M, 4*M},{1*M, 4*M},{2*M, 4*M},{3*M, 4*M},{4*M, 4*M},
         {-4*M, 3*M},{-3*M, 3*M},{-2*M, 3*M},{-1*M, 3*M},{0*M, 3*M},{1*M, 3*M},{2*M, 3*M},{3*M, 3*M},{4*M, 3*M},
@@ -64,9 +65,25 @@ public class PieceRenderer {
         piece.transform.localPosition = new Vector3(x, y);
         piece.transform.localScale = new Vector3(scale_x, scale_y);
 
+        piece.GetComponent<Piece>().SetPieceType(type);
+        piece.GetComponent<Piece>().SetTurn(turn);
         piece.GetComponent<Image>().sprite = Resources.Load<Sprite>(PIECE_IMG_DIR + piece_names[(int)type]);
         if (turn == turn.WHITE)
             piece.transform.Rotate(new Vector3(180.0f, 180.0f, 0.0f));
+    }
+
+    public void Move(GameObject src, Vector3 dst) {
+        if (dst.x < POSITIONS[0, COL] - M / 2 || dst.x > POSITIONS[MAX_IDX, COL] + M / 2 ||
+            dst.y > POSITIONS[0, ROW] - M / 2 || dst.y < POSITIONS[MAX_IDX, ROW] + M / 2)
+            return;
+
+        for (int i = 0; i <= MAX_IDX; i++) {
+            if (dst.x >= POSITIONS[i, COL] - M / 2 && dst.x <= POSITIONS[i, COL] + M / 2 &&
+                dst.y >= POSITIONS[i, ROW] - M / 2 && dst.y <= POSITIONS[i, ROW] + M / 2) {
+                src.transform.localPosition = new Vector3(POSITIONS[i, COL], POSITIONS[i, ROW], 0.0f);
+                break;
+            }
+        }
     }
 
     public void AddHand(GameObject[] pieces, piece_types type) {
@@ -87,7 +104,7 @@ public class PieceRenderer {
             piece.SetActive(false);
     }
 
-    public void RenderSfen(GameObject board, GameObject piecePrefab, string sfen, List<GameObject> pieces) {
+    public void RenderSfen(GameObject board, GameObject piecePrefab, string sfen) {
         int idx = 0;
         string p = "";
         foreach (var c in sfen) {
