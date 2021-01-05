@@ -74,7 +74,7 @@ public class PieceRenderer {
 
     public void Move(GameObject src, Vector3 dst) {
         if (dst.x < POSITIONS[0, COL] - M / 2 || dst.x > POSITIONS[MAX_IDX, COL] + M / 2 ||
-            dst.y > POSITIONS[0, ROW] - M / 2 || dst.y < POSITIONS[MAX_IDX, ROW] + M / 2)
+            dst.y > POSITIONS[0, ROW] + M / 2 || dst.y < POSITIONS[MAX_IDX, ROW] - M / 2)
             return;
 
         for (int i = 0; i <= MAX_IDX; i++) {
@@ -84,6 +84,11 @@ public class PieceRenderer {
                 break;
             }
         }
+    }
+
+    public void Capture(GameObject cap, GameObject[] hand_pieces, piece_types type) {
+        GameObject.Destroy(cap);
+        AddHand(hand_pieces, type);
     }
 
     public void AddHand(GameObject[] pieces, piece_types type) {
