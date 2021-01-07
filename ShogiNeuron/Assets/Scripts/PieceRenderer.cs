@@ -59,6 +59,19 @@ public class PieceRenderer {
         Render(base_obj, piecePrefab, x, y, scale_x, scale_y, type, turn);
     }
 
+    public void Render(GameObject base_obj, GameObject piecePrefab, Vector3 v, piece_types type, turn turn) {
+        if (v.x < POSITIONS[0, COL] - M / 2 || v.x > POSITIONS[MAX_IDX, COL] + M / 2 ||
+            v.y > POSITIONS[0, ROW] + M / 2 || v.y < POSITIONS[MAX_IDX, ROW] - M / 2)
+            return;
+
+        for (int i = 0; i <= MAX_IDX; i++) {
+            if (v.x >= POSITIONS[i, COL] - M / 2 && v.x <= POSITIONS[i, COL] + M / 2 &&
+                v.y >= POSITIONS[i, ROW] - M / 2 && v.y <= POSITIONS[i, ROW] + M / 2) {
+                Render(base_obj, piecePrefab, i, type, turn);
+            }
+        }
+    }
+
     public void Render(GameObject base_obj, GameObject piecePrefab, float x, float y, float scale_x, float scale_y, piece_types type, turn turn) {
         GameObject piece = Object.Instantiate(piecePrefab);
         piece.transform.SetParent(base_obj.transform, false);
@@ -89,6 +102,11 @@ public class PieceRenderer {
     public void Capture(GameObject cap, GameObject[] hand_pieces, piece_types type) {
         GameObject.Destroy(cap);
         AddHand(hand_pieces, type);
+    }
+
+    public void Drop(GameObject base_obj, GameObject piecePrefab, GameObject[] pieces, Vector3 dst, piece_types type, turn turn) {
+        Render(base_obj, piecePrefab, dst, type, turn);
+        SubHand(pieces, type);
     }
 
     public void AddHand(GameObject[] pieces, piece_types type) {

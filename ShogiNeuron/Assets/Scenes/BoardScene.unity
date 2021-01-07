@@ -179,7 +179,7 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 50864725}
-          m_MethodName: TapPiece
+          m_MethodName: Tap
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -198,7 +198,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 50864722}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 58d3fde37e8ad9d4396c1a7fa863866d, type: 3}
+  m_Script: {fileID: 11500000, guid: 426ba6f271a2a2548a20706ed80b88ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &50864726
@@ -296,7 +296,7 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 93680047}
-          m_MethodName: TapPiece
+          m_MethodName: Tap
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -315,7 +315,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 93680044}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 58d3fde37e8ad9d4396c1a7fa863866d, type: 3}
+  m_Script: {fileID: 11500000, guid: 426ba6f271a2a2548a20706ed80b88ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &93680048
@@ -413,7 +413,7 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 106180518}
-          m_MethodName: TapPiece
+          m_MethodName: Tap
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -432,7 +432,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 106180515}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 58d3fde37e8ad9d4396c1a7fa863866d, type: 3}
+  m_Script: {fileID: 11500000, guid: 426ba6f271a2a2548a20706ed80b88ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &106180519
@@ -530,7 +530,7 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 197106692}
-          m_MethodName: TapPiece
+          m_MethodName: Tap
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -549,7 +549,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 197106689}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 58d3fde37e8ad9d4396c1a7fa863866d, type: 3}
+  m_Script: {fileID: 11500000, guid: 426ba6f271a2a2548a20706ed80b88ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &197106693
@@ -842,7 +842,7 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 268928661}
-          m_MethodName: TapPiece
+          m_MethodName: Tap
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -861,7 +861,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 268928658}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 58d3fde37e8ad9d4396c1a7fa863866d, type: 3}
+  m_Script: {fileID: 11500000, guid: 426ba6f271a2a2548a20706ed80b88ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &268928662
@@ -959,7 +959,7 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 351096039}
-          m_MethodName: TapPiece
+          m_MethodName: Tap
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -978,7 +978,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 351096036}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 58d3fde37e8ad9d4396c1a7fa863866d, type: 3}
+  m_Script: {fileID: 11500000, guid: 426ba6f271a2a2548a20706ed80b88ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &351096040
@@ -1076,7 +1076,7 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 377757471}
-          m_MethodName: TapPiece
+          m_MethodName: Tap
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -1095,7 +1095,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 377757468}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 58d3fde37e8ad9d4396c1a7fa863866d, type: 3}
+  m_Script: {fileID: 11500000, guid: 426ba6f271a2a2548a20706ed80b88ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &377757472
@@ -1193,7 +1193,7 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 429706794}
-          m_MethodName: TapPiece
+          m_MethodName: Tap
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -1212,7 +1212,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 429706791}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 58d3fde37e8ad9d4396c1a7fa863866d, type: 3}
+  m_Script: {fileID: 11500000, guid: 426ba6f271a2a2548a20706ed80b88ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &429706795
@@ -1509,7 +1509,7 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 598534737}
-          m_MethodName: TapPiece
+          m_MethodName: Tap
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -1528,7 +1528,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 598534734}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 58d3fde37e8ad9d4396c1a7fa863866d, type: 3}
+  m_Script: {fileID: 11500000, guid: 426ba6f271a2a2548a20706ed80b88ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &598534738
@@ -2147,7 +2147,7 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 1126899572}
-          m_MethodName: TapPiece
+          m_MethodName: Tap
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -2166,7 +2166,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1126899569}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 58d3fde37e8ad9d4396c1a7fa863866d, type: 3}
+  m_Script: {fileID: 11500000, guid: 426ba6f271a2a2548a20706ed80b88ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &1126899573
@@ -2358,7 +2358,7 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 1143739357}
-          m_MethodName: TapPiece
+          m_MethodName: Tap
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -2377,7 +2377,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1143739354}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 58d3fde37e8ad9d4396c1a7fa863866d, type: 3}
+  m_Script: {fileID: 11500000, guid: 426ba6f271a2a2548a20706ed80b88ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &1143739358
@@ -2851,7 +2851,7 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 1567947967}
-          m_MethodName: TapPiece
+          m_MethodName: Tap
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -2870,7 +2870,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1567947964}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 58d3fde37e8ad9d4396c1a7fa863866d, type: 3}
+  m_Script: {fileID: 11500000, guid: 426ba6f271a2a2548a20706ed80b88ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &1567947968
@@ -3222,7 +3222,7 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 1844233592}
-          m_MethodName: TapPiece
+          m_MethodName: Tap
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -3241,7 +3241,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1844233589}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 58d3fde37e8ad9d4396c1a7fa863866d, type: 3}
+  m_Script: {fileID: 11500000, guid: 426ba6f271a2a2548a20706ed80b88ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &1844233593
@@ -3550,18 +3550,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2073769715}
   m_CullTransparentMesh: 0
---- !u!114 &933274405647934280
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2975257747738763728}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 58d3fde37e8ad9d4396c1a7fa863866d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &2975257747738763728
 GameObject:
   m_ObjectHideFlags: 0
@@ -3573,7 +3561,7 @@ GameObject:
   - component: {fileID: 2975257747738763729}
   - component: {fileID: 2975257747738763731}
   - component: {fileID: 2975257747738763730}
-  - component: {fileID: 933274405647934280}
+  - component: {fileID: 2975257747738763732}
   - component: {fileID: 6700918780737364813}
   m_Layer: 0
   m_Name: Porn
@@ -3639,6 +3627,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2975257747738763728}
   m_CullTransparentMesh: 0
+--- !u!114 &2975257747738763732
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2975257747738763728}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 426ba6f271a2a2548a20706ed80b88ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &6700918780737364813
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3656,8 +3656,8 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 933274405647934280}
-          m_MethodName: TapPiece
+        - m_Target: {fileID: 2975257747738763732}
+          m_MethodName: Tap
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
