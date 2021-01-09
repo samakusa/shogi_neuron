@@ -40,6 +40,8 @@ public class Piece : MonoBehaviour {
             // Asser(this.BoardScene.GetStatus() == BoardScene.STATUS.DROP);
             this.BoardScene_.SetStatus(BoardScene.STATUS.NORMAL);
         }
+        else if (this.BoardScene_.GetStatus() == BoardScene.STATUS.PROMOTE) {
+        }
         else {
             // Assert(true);
         }

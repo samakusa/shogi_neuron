@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class BoardScene : MonoBehaviour {
+    public GameObject Canvas;
     public GameObject onBoard;
     public GameObject piecePrefab;
     public GameObject[] BlackHandPieces;
@@ -12,6 +13,7 @@ public class BoardScene : MonoBehaviour {
         NORMAL,
         MOVE,
         DROP,
+        PROMOTE,
     };
 
     private PieceRenderer PieceRenderer = new PieceRenderer();
@@ -31,6 +33,7 @@ public class BoardScene : MonoBehaviour {
             this.WhiteHandPieces[i].GetComponent<Hand>().SetTurn(PieceRenderer.turn.WHITE);
         }
         PieceRenderer.RenderSfen(this.onBoard, this.piecePrefab, this.begin_board_sfen);
+        var handler = Promote.ShowDialog(this.Canvas, new Vector3(0.0f, 0.0f, 0.0f));
     }
 
     // Update is called once per frame

@@ -33,6 +33,8 @@ public class OnBoard : MonoBehaviour {
             Vector3 v = new Vector3(m.x - c.x / 2, m.y - c.y / 2, 0.0f);
             this.BoardScene_.Drop(v);
         }
+        else if (this.BoardScene_.GetStatus() == BoardScene.STATUS.PROMOTE) {
+        }
         else {
             // Assert(true);
         }

@@ -22,9 +22,19 @@ public class Hand : MonoBehaviour {
     }
 
     public void Tap() {
-        this.BoardScene_.SetDropPieceType(this.PieceType);
-        this.BoardScene_.SetDropTurn(this.Turn);
-        this.BoardScene_.SetStatus(BoardScene.STATUS.DROP);
+        if (this.BoardScene_.GetStatus() == BoardScene.STATUS.NORMAL) {
+            this.BoardScene_.SetDropPieceType(this.PieceType);
+            this.BoardScene_.SetDropTurn(this.Turn);
+            this.BoardScene_.SetStatus(BoardScene.STATUS.DROP);
+        }
+        else if (this.BoardScene_.GetStatus() == BoardScene.STATUS.MOVE) {
+            this.BoardScene_.SetStatus(BoardScene.STATUS.NORMAL);
+        }
+        else if (this.BoardScene_.GetStatus() == BoardScene.STATUS.DROP) {
+            this.BoardScene_.SetStatus(BoardScene.STATUS.NORMAL);
+        }
+        else if (this.BoardScene_.GetStatus() == BoardScene.STATUS.PROMOTE) {
+        }
     }
 
     public PieceRenderer.piece_types GetPieceType() {
