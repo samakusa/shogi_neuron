@@ -104,13 +104,15 @@ public class PieceRenderer {
 
         if (is_promote) {
             piece_types type = src.GetComponent<Piece>().GetPieceType() + PROMOTE;
+            src.GetComponent<Piece>().SetPieceType(type);
             src.GetComponent<Image>().sprite = Resources.Load<Sprite>(PIECE_IMG_DIR + piece_names[(int)type]);
         }
     }
 
     public void Capture(GameObject cap, GameObject[] hand_pieces, piece_types type) {
         GameObject.Destroy(cap);
-        AddHand(hand_pieces, type);
+        piece_types add_type = type < piece_types.PORN_PROMOTED ? type : type - PROMOTE;
+        AddHand(hand_pieces, add_type);
     }
 
     public void Drop(GameObject base_obj, GameObject piecePrefab, GameObject[] pieces, Vector3 dst, piece_types type, turn turn) {

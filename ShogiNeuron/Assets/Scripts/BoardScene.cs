@@ -42,7 +42,7 @@ public class BoardScene : MonoBehaviour {
 
     public void Move(Vector3 dst) {
         if (ENABLE_PROMOTE(dst, this.PieceSelected)) {
-            var handler = Promote.ShowDialog(this.Canvas, new Vector3(0.0f, 0.0f, 0.0f),
+            var handler = Promote.ShowDialog(this.Canvas, dst,
                 this.PieceSelected.GetComponent<Piece>().GetPieceType(),
                 () => Move(dst, true),
                 () => Move(dst, false)
@@ -60,7 +60,7 @@ public class BoardScene : MonoBehaviour {
 
     public void Move(Vector3 dst, GameObject cap_piece, PieceRenderer.piece_types type, PieceRenderer.turn turn) {
         if (ENABLE_PROMOTE(dst, this.PieceSelected)) {
-            var handler = Promote.ShowDialog(this.Canvas, new Vector3(0.0f, 0.0f, 0.0f),
+            var handler = Promote.ShowDialog(this.Canvas, dst,
                 this.PieceSelected.GetComponent<Piece>().GetPieceType(),
                 () => Move(dst, cap_piece, type, turn, true),
                 () => Move(dst, cap_piece, type, turn, false)
@@ -88,13 +88,17 @@ public class BoardScene : MonoBehaviour {
     }
 
     private bool ENABLE_PROMOTE_BLACK(Vector3 v, GameObject piece) {
+        Vector3 src = piece.transform.localPosition;
         PieceRenderer.turn turn = piece.GetComponent<Piece>().GetTurn();
-        return turn == PieceRenderer.turn.BLACK && PieceRenderer.Row(v) <= 3;
+        PieceRenderer.piece_types type = piece.GetComponent<Piece>().GetPieceType();
+        return turn == PieceRenderer.turn.BLACK && (PieceRenderer.Row(src) <= 3 || PieceRenderer.Row(v) <= 3) && type <= PieceRenderer.piece_types.ROOK;
     }
 
     private bool ENABLE_PROMOTE_WHITE(Vector3 v, GameObject piece) {
+        Vector3 src = piece.transform.localPosition;
         PieceRenderer.turn turn = piece.GetComponent<Piece>().GetTurn();
-        return turn == PieceRenderer.turn.WHITE && PieceRenderer.Row(v) >= 7;
+        PieceRenderer.piece_types type = piece.GetComponent<Piece>().GetPieceType();
+        return turn == PieceRenderer.turn.WHITE && (PieceRenderer.Row(src) >= 7 || PieceRenderer.Row(v) >= 7) && type <= PieceRenderer.piece_types.ROOK;
     }
 
     private bool ENABLE_PROMOTE(Vector3 v, GameObject piece) {
