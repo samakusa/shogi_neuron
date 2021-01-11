@@ -7,6 +7,7 @@ public class BoardScene : MonoBehaviour {
     public GameObject Canvas;
     public GameObject onBoard;
     public GameObject piecePrefab;
+    public GameObject promotePrefab;
     public GameObject[] BlackHandPieces;
     public GameObject[] WhiteHandPieces;
     public enum STATUS {
@@ -33,7 +34,6 @@ public class BoardScene : MonoBehaviour {
             this.WhiteHandPieces[i].GetComponent<Hand>().SetTurn(PieceRenderer.turn.WHITE);
         }
         PieceRenderer.RenderSfen(this.onBoard, this.piecePrefab, this.begin_board_sfen);
-        var handler = Promote.ShowDialog(this.Canvas, new Vector3(0.0f, 0.0f, 0.0f));
     }
 
     // Update is called once per frame
@@ -41,13 +41,39 @@ public class BoardScene : MonoBehaviour {
     }
 
     public void Move(Vector3 dst) {
-        this.PieceRenderer.Move(this.PieceSelected, dst);
+        if (ENABLE_PROMOTE(dst, this.PieceSelected)) {
+            var handler = Promote.ShowDialog(this.Canvas, new Vector3(0.0f, 0.0f, 0.0f),
+                this.PieceSelected.GetComponent<Piece>().GetPieceType(),
+                () => Move(dst, true),
+                () => Move(dst, false)
+                );
+        }
+        else {
+            Move(dst, false);
+        }
+    }
+
+    private void Move(Vector3 dst, bool promote) {
+        this.PieceRenderer.Move(this.PieceSelected, dst, promote);
         SetStatus(STATUS.NORMAL);
     }
 
     public void Move(Vector3 dst, GameObject cap_piece, PieceRenderer.piece_types type, PieceRenderer.turn turn) {
+        if (ENABLE_PROMOTE(dst, this.PieceSelected)) {
+            var handler = Promote.ShowDialog(this.Canvas, new Vector3(0.0f, 0.0f, 0.0f),
+                this.PieceSelected.GetComponent<Piece>().GetPieceType(),
+                () => Move(dst, cap_piece, type, turn, true),
+                () => Move(dst, cap_piece, type, turn, false)
+                );
+        }
+        else {
+            Move(dst, cap_piece, type, turn, false);
+        }
+    }
+
+    private void Move(Vector3 dst, GameObject cap_piece, PieceRenderer.piece_types type, PieceRenderer.turn turn, bool promote) {
         this.PieceRenderer.Capture(cap_piece, turn == PieceRenderer.turn.BLACK ? this.WhiteHandPieces : this.BlackHandPieces, type);
-        this.PieceRenderer.Move(this.PieceSelected, dst);
+        this.PieceRenderer.Move(this.PieceSelected, dst, promote);
         SetStatus(STATUS.NORMAL);
     }
 
@@ -59,6 +85,20 @@ public class BoardScene : MonoBehaviour {
                            this.DropPieceType,
                            this.DropTurn);
         SetStatus(STATUS.NORMAL);
+    }
+
+    private bool ENABLE_PROMOTE_BLACK(Vector3 v, GameObject piece) {
+        PieceRenderer.turn turn = piece.GetComponent<Piece>().GetTurn();
+        return turn == PieceRenderer.turn.BLACK && PieceRenderer.Row(v) <= 3;
+    }
+
+    private bool ENABLE_PROMOTE_WHITE(Vector3 v, GameObject piece) {
+        PieceRenderer.turn turn = piece.GetComponent<Piece>().GetTurn();
+        return turn == PieceRenderer.turn.WHITE && PieceRenderer.Row(v) >= 7;
+    }
+
+    private bool ENABLE_PROMOTE(Vector3 v, GameObject piece) {
+        return ENABLE_PROMOTE_BLACK(v, piece) || ENABLE_PROMOTE_WHITE(v, piece);
     }
 
     public STATUS GetStatus() {

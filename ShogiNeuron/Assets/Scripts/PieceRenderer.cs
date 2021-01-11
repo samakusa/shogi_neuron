@@ -8,9 +8,10 @@ public class PieceRenderer {
         NONE, PORN, LANCE, KNIGHT, SILVER, BISHOP, ROOK, GOLD, KING,
         PORN_PROMOTED, LANCE_PROMOTED, KNIGHT_PROMOTED, SILVER_PROMOTED, BISHOP_PROMOTED, ROOK_PROMOTED,
     };
+    public const int PROMOTE = 8;
 
-    private const string PIECE_IMG_DIR = "Images/";
-    private string[] piece_names = {
+    public const string PIECE_IMG_DIR = "Images/";
+    public static string[] piece_names = {
         "",
         "porn",
         "lance",
@@ -33,11 +34,14 @@ public class PieceRenderer {
         WHITE,
     }
 
+    private const int MAX_COL = 9;
+    private const int MAX_ROW = 9;
     private const float SCALE_X = 0.2f;
     private const float SCALE_Y = 0.2f;
     private const float M = 63.0f;  // margin
     private const int COL = 0;  // index
     private const int ROW = 1;  // index
+    private const int INVALID_IDX = -1;
     private const int MAX_IDX = 80;
     private float[,] POSITIONS = {
         {-4*M, 4*M},{-3*M, 4*M},{-2*M, 4*M},{-1*M, 4*M},{0*M, 4*M},{1*M, 4*M},{2*M, 4*M},{3*M, 4*M},{4*M, 4*M},
@@ -85,7 +89,7 @@ public class PieceRenderer {
             piece.transform.Rotate(new Vector3(180.0f, 180.0f, 0.0f));
     }
 
-    public void Move(GameObject src, Vector3 dst) {
+    public void Move(GameObject src, Vector3 dst, bool is_promote=false) {
         if (dst.x < POSITIONS[0, COL] - M / 2 || dst.x > POSITIONS[MAX_IDX, COL] + M / 2 ||
             dst.y > POSITIONS[0, ROW] + M / 2 || dst.y < POSITIONS[MAX_IDX, ROW] - M / 2)
             return;
@@ -96,6 +100,11 @@ public class PieceRenderer {
                 src.transform.localPosition = new Vector3(POSITIONS[i, COL], POSITIONS[i, ROW], 0.0f);
                 break;
             }
+        }
+
+        if (is_promote) {
+            piece_types type = src.GetComponent<Piece>().GetPieceType() + PROMOTE;
+            src.GetComponent<Image>().sprite = Resources.Load<Sprite>(PIECE_IMG_DIR + piece_names[(int)type]);
         }
     }
 
@@ -273,5 +282,41 @@ public class PieceRenderer {
             Render(board, piecePrefab, idx, type, t);
             p = ""; idx++;
         }
+    }
+
+    public int Idx(Vector3 v) {
+        if (v.x < POSITIONS[0, COL] - M / 2 || v.x > POSITIONS[MAX_IDX, COL] + M / 2 ||
+            v.y > POSITIONS[0, ROW] + M / 2 || v.y < POSITIONS[MAX_IDX, ROW] - M / 2)
+            return INVALID_IDX;
+
+        for (int i = 0; i <= MAX_IDX; i++) {
+            if (v.x >= POSITIONS[i, COL] - M / 2 && v.x <= POSITIONS[i, COL] + M / 2 &&
+                v.y >= POSITIONS[i, ROW] - M / 2 && v.y <= POSITIONS[i, ROW] + M / 2) {
+                return i;
+            }
+        }
+
+        // Assert(true);
+        return INVALID_IDX;
+    }
+
+    public Vector3 CenterPos(Vector3 v) {
+        return new Vector3(POSITIONS[Idx(v), COL], POSITIONS[Idx(v), ROW], 0.0f);
+    }
+
+    public int Col(int idx) {
+        return idx % MAX_COL + 1;
+    }
+
+    public int Col(Vector3 v) {
+        return Col(Idx(v));
+    }
+
+    public int Row(int idx) {
+        return idx / MAX_COL + 1;
+    }
+
+    public int Row(Vector3 v) {
+        return Row(Idx(v));
     }
 }
