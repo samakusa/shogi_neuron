@@ -3,13 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class OnBoard : MonoBehaviour {
-    private GameObject Canvas;
+    public GameObject Canvas;
     private GameObject BoardSceneObj;
     private BoardScene BoardScene_;
 
     // Start is called before the first frame update
     void Start() {
-        this.Canvas = GameObject.Find("Canvas");
         this.BoardSceneObj = GameObject.Find("BoardScene");
         this.BoardScene_ = this.BoardSceneObj.GetComponent<BoardScene>();
     }

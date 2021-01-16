@@ -1452,6 +1452,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 487c76e7db7b925439130ea08ab44f35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Canvas: {fileID: 241268364}
 --- !u!114 &558689999
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1897,8 +1898,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Canvas: {fileID: 241268364}
   onBoard: {fileID: 558689993}
-  piecePrefab: {fileID: 9149916006469265763, guid: 963b631bf571ce24e8cc81a995bd74f0,
+  piecePrefab: {fileID: 7209840740644356560, guid: 963b631bf571ce24e8cc81a995bd74f0,
     type: 3}
+  promotePrefab: {fileID: 0}
   BlackHandPieces:
   - {fileID: 0}
   - {fileID: 2975257747738763728}

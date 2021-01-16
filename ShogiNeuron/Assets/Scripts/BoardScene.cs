@@ -25,6 +25,9 @@ public class BoardScene : MonoBehaviour {
     private PieceRenderer.piece_types DropPieceType;
     private PieceRenderer.turn DropTurn;
 
+    private Engine _Engine;
+    private bool b;
+
     // Start is called before the first frame update
     void Start() {
         for (int i = 1; i <= (int)PieceRenderer.piece_types.GOLD; i++) {
@@ -34,10 +37,22 @@ public class BoardScene : MonoBehaviour {
             this.WhiteHandPieces[i].GetComponent<Hand>().SetTurn(PieceRenderer.turn.WHITE);
         }
         PieceRenderer.RenderSfen(this.onBoard, this.piecePrefab, this.begin_board_sfen);
+
+        this._Engine = new Engine();
+        this._Engine.Initialize();
     }
 
     // Update is called once per frame
     void Update() {
+        if (!this.b) {
+            this._Engine.Send("user echo test0");
+            this._Engine.Send("user echo test1");
+            this._Engine.Send("user echo test2");
+            this._Engine.Send("user echo test3");
+            this.b = true;
+        }
+        string output = this._Engine.Recieve();
+        if (output != "") Debug.Log(output);
     }
 
     public void Move(Vector3 dst) {
@@ -51,6 +66,9 @@ public class BoardScene : MonoBehaviour {
         else {
             Move(dst, false);
         }
+    }
+    public void OnDestroy() {
+        this._Engine.Send("quit");
     }
 
     private void Move(Vector3 dst, bool promote) {

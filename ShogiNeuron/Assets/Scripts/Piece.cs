@@ -5,7 +5,7 @@ using UnityEngine;
 public class Piece : MonoBehaviour {
     private PieceRenderer.piece_types PieceType;
     private PieceRenderer.turn Turn;
-    private GameObject Canvas;
+    public GameObject Canvas;
     private GameObject BoardSceneObj;
     private BoardScene BoardScene_;
     private PieceRenderer Render = new PieceRenderer();
