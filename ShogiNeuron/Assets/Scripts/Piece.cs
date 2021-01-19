@@ -12,7 +12,7 @@ public class Piece : MonoBehaviour {
 
     // Start is called before the first frame update
     void Start() {
-        this.Canvas = GameObject.Find("Canvas");
+        this.Canvas = GameObject.Find("BoardCanvas");
         this.BoardSceneObj = GameObject.Find("BoardScene");
         this.BoardScene_ = this.BoardSceneObj.GetComponent<BoardScene>();
     }
