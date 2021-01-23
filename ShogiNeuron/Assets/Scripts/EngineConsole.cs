@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class EngineConsole : MonoBehaviour {
     public GameObject InputField;
     public GameObject OutputText;
+    public GameObject ScrollRect;
     private Engine _Engine;
 
     // Start is called before the first frame update
@@ -17,16 +18,21 @@ public class EngineConsole : MonoBehaviour {
     // Update is called once per frame
     void Update() {
         string output = this._Engine.Recieve();
-        if (output != "") this.OutputText.GetComponent<Text>().text += output;
+        if (output != "") {
+            this.OutputText.GetComponent<Text>().text += output;
+            this.OutputText.GetComponent<ContentSizeFitter>().SetLayoutVertical();
+            this.ScrollRect.GetComponent<ScrollRect>().verticalNormalizedPosition = 0;
+        }
     }
 
     public void Enter() {
-        Exec();
+        string input = this.InputField.GetComponent<InputField>().text;
+        Exec(input);
         this.InputField.GetComponent<InputField>().text = "";
+        this.InputField.GetComponent<InputField>().ActivateInputField();
     }
 
-    public void Exec() {
-        string input = this.InputField.GetComponent<InputField>().text;
+    public void Exec(string input) {
         this.OutputText.GetComponent<Text>().text += "> " + input + "\n";
         this._Engine.Send(input);
     }

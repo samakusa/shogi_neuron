@@ -8,6 +8,7 @@ public class BoardScene : MonoBehaviour {
     public GameObject onBoard;
     public GameObject piecePrefab;
     public GameObject promotePrefab;
+    public GameObject EngineConsole;
     public GameObject[] BlackHandPieces;
     public GameObject[] WhiteHandPieces;
     public enum STATUS {
@@ -34,6 +35,10 @@ public class BoardScene : MonoBehaviour {
             this.WhiteHandPieces[i].GetComponent<Hand>().SetTurn(PieceRenderer.turn.WHITE);
         }
         PieceRenderer.RenderSfen(this.onBoard, this.piecePrefab, this.begin_board_sfen);
+
+        this.EngineConsole.GetComponent<EngineConsole>().Exec("usi");
+        this.EngineConsole.GetComponent<EngineConsole>().Exec("isready");
+        this.EngineConsole.GetComponent<EngineConsole>().Exec("position startpos");
     }
 
     // Update is called once per frame

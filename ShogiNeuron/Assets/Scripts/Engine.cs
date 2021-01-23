@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Text;
 using UnityEngine;
 
 public class Engine {
@@ -14,6 +15,7 @@ public class Engine {
         this._Engine.StartInfo.FileName = System.IO.Directory.GetCurrentDirectory() + "\\Assets\\Resources\\Engine\\shogi_neuron.exe";
         this._Engine.StartInfo.RedirectStandardInput = true;
         this._Engine.StartInfo.RedirectStandardOutput = true;
+        this._Engine.StartInfo.StandardOutputEncoding = Encoding.GetEncoding("shift_jis");
         this._Engine.StartInfo.UseShellExecute = false;
         this._Engine.StartInfo.CreateNoWindow = true;
         this._Engine.OutputDataReceived += new DataReceivedEventHandler(Output);
