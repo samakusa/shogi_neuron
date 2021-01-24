@@ -5,15 +5,15 @@ using UnityEngine.UI;
 
 public class PieceRenderer {
     public enum piece_types {
-        NONE, PORN, LANCE, KNIGHT, SILVER, BISHOP, ROOK, GOLD, KING,
-        PORN_PROMOTED, LANCE_PROMOTED, KNIGHT_PROMOTED, SILVER_PROMOTED, BISHOP_PROMOTED, ROOK_PROMOTED,
+        NONE, PAWN, LANCE, KNIGHT, SILVER, BISHOP, ROOK, GOLD, KING,
+        PAWN_PROMOTED, LANCE_PROMOTED, KNIGHT_PROMOTED, SILVER_PROMOTED, BISHOP_PROMOTED, ROOK_PROMOTED,
     };
     public const int PROMOTE = 8;
 
     public const string PIECE_IMG_DIR = "Images/";
     public static string[] piece_names = {
         "",
-        "porn",
+        "pawn",
         "lance",
         "knight",
         "silver",
@@ -21,7 +21,7 @@ public class PieceRenderer {
         "rook",
         "gold",
         "king",
-        "porn_promoted",
+        "pawn_promoted",
         "lance_promoted",
         "knight_promoted",
         "silver_promoted",
@@ -111,7 +111,7 @@ public class PieceRenderer {
 
     public void Capture(GameObject cap, GameObject[] hand_pieces, piece_types type) {
         GameObject.Destroy(cap);
-        piece_types add_type = type < piece_types.PORN_PROMOTED ? type : type - PROMOTE;
+        piece_types add_type = type < piece_types.PAWN_PROMOTED ? type : type - PROMOTE;
         AddHand(hand_pieces, add_type);
     }
 
@@ -164,7 +164,7 @@ public class PieceRenderer {
                 break;
             }
             else if (p == "P") {
-                type = piece_types.PORN;
+                type = piece_types.PAWN;
                 t = turn.BLACK;
             }
             else if (p == "L") {
@@ -196,7 +196,7 @@ public class PieceRenderer {
                 t = turn.BLACK;
             }
             else if (p == "+P") {
-                type = piece_types.PORN_PROMOTED;
+                type = piece_types.PAWN_PROMOTED;
                 t = turn.BLACK;
             }
             else if (p == "+L") {
@@ -220,7 +220,7 @@ public class PieceRenderer {
                 t = turn.BLACK;
             }
             else if (p == "p") {
-                type = piece_types.PORN;
+                type = piece_types.PAWN;
                 t = turn.WHITE;
             }
             else if (p == "l") {
@@ -252,7 +252,7 @@ public class PieceRenderer {
                 t = turn.WHITE;
             }
             else if (p == "+p") {
-                type = piece_types.PORN_PROMOTED;
+                type = piece_types.PAWN_PROMOTED;
                 t = turn.WHITE;
             }
             else if (p == "+l") {
