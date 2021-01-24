@@ -17,9 +17,19 @@ public class BoardScene : MonoBehaviour {
         DROP,
         PROMOTE,
     };
+    public class KifElem {
+        private string sfen;
+        private string code;
+
+        public KifElem(string sfen, string code) { this.sfen = sfen; this.code = code; }
+        public string GetSfen() { return this.sfen; }
+        public string GetCode() { return this.code; }
+    }
 
     private PieceRenderer PieceRenderer = new PieceRenderer();
+    private EngineConsole _EngineConsole;
     private string begin_board_sfen = "lnsgkgsnl/1r5b1/ppppppppp/9/9/9/PPPPPPPPP/1B5R1/LNSGKGSNL b -";
+    private List<KifElem> Kif = new List<KifElem>();
 
     private STATUS Status = STATUS.NORMAL;
     private GameObject PieceSelected;
@@ -36,9 +46,10 @@ public class BoardScene : MonoBehaviour {
         }
         PieceRenderer.RenderSfen(this.onBoard, this.piecePrefab, this.begin_board_sfen);
 
-        this.EngineConsole.GetComponent<EngineConsole>().Exec("usi");
-        this.EngineConsole.GetComponent<EngineConsole>().Exec("isready");
-        this.EngineConsole.GetComponent<EngineConsole>().Exec("position startpos");
+        this._EngineConsole = this.EngineConsole.GetComponent<EngineConsole>();
+        this._EngineConsole.Exec("usi");
+        this._EngineConsole.Exec("isready");
+        this._EngineConsole.Exec("position startpos");
     }
 
     // Update is called once per frame
@@ -59,7 +70,16 @@ public class BoardScene : MonoBehaviour {
     }
 
     private void Move(Vector3 dst, bool promote) {
-        this.PieceRenderer.Move(this.PieceSelected, dst, promote);
+        int srcIdx = PieceRenderer.Idx(this.PieceSelected.transform.localPosition);
+        int dstIdx = PieceRenderer.Idx(dst);
+
+        if (this._EngineConsole.IsLegalMove(srcIdx, dstIdx, promote)) {
+            string sfen = this._EngineConsole.SfenMove(srcIdx, dstIdx, promote);
+            string code = this._EngineConsole.KifMove(srcIdx, dstIdx, promote);
+            this.Kif.Add(new KifElem(sfen, code));
+            this._EngineConsole.Position(this.Kif);
+            this.PieceRenderer.Move(this.PieceSelected, dst, promote);
+        }
         SetStatus(STATUS.NORMAL);
     }
 
@@ -77,18 +97,36 @@ public class BoardScene : MonoBehaviour {
     }
 
     private void Move(Vector3 dst, GameObject cap_piece, PieceRenderer.piece_types type, PieceRenderer.turn turn, bool promote) {
-        this.PieceRenderer.Capture(cap_piece, turn == PieceRenderer.turn.BLACK ? this.WhiteHandPieces : this.BlackHandPieces, type);
-        this.PieceRenderer.Move(this.PieceSelected, dst, promote);
+        int srcIdx = PieceRenderer.Idx(this.PieceSelected.transform.localPosition);
+        int dstIdx = PieceRenderer.Idx(dst);
+
+        if (this._EngineConsole.IsLegalMove(srcIdx, dstIdx, promote)) {
+            string sfen = this._EngineConsole.SfenMove(srcIdx, dstIdx, promote);
+            string code = this._EngineConsole.KifMove(srcIdx, dstIdx, promote);
+            this.Kif.Add(new KifElem(sfen, code));
+            this._EngineConsole.Position(this.Kif);
+            this.PieceRenderer.Capture(cap_piece, turn == PieceRenderer.turn.BLACK ? this.WhiteHandPieces : this.BlackHandPieces, type);
+            this.PieceRenderer.Move(this.PieceSelected, dst, promote);
+        }
         SetStatus(STATUS.NORMAL);
     }
 
     public void Drop(Vector3 dst) {
-        PieceRenderer.Drop(this.onBoard,
-                           this.piecePrefab,
-                           this.DropTurn == PieceRenderer.turn.BLACK ? this.BlackHandPieces : this.WhiteHandPieces,
-                           dst,
-                           this.DropPieceType,
-                           this.DropTurn);
+        string piece = PieceRenderer.piece_names[(int)this.DropPieceType];
+        int dstIdx = PieceRenderer.Idx(dst);
+
+        if (this._EngineConsole.IsLegalDrop(piece, dstIdx)) {
+            string sfen = this._EngineConsole.SfenDrop(piece, dstIdx);
+            string code = this._EngineConsole.KifDrop(piece, dstIdx);
+            this.Kif.Add(new KifElem(sfen, code));
+            this._EngineConsole.Position(this.Kif);
+            PieceRenderer.Drop(this.onBoard,
+                               this.piecePrefab,
+                               this.DropTurn == PieceRenderer.turn.BLACK ? this.BlackHandPieces : this.WhiteHandPieces,
+                               dst,
+                               this.DropPieceType,
+                               this.DropTurn);
+        }
         SetStatus(STATUS.NORMAL);
     }
 
