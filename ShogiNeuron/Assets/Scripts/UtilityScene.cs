@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class TitleScene : MonoBehaviour {
-
+public class UtilityScene : MonoBehaviour {
     // Start is called before the first frame update
     void Start() {
     }
@@ -13,11 +12,7 @@ public class TitleScene : MonoBehaviour {
     void Update() {
     }
 
-    public void GameStart() {
-        SceneManager.LoadScene("BoardScene");
-    }
-
-    public void Utility() {
-        SceneManager.LoadScene("UtilityScene");
+    public void Furigoma() {
+        SceneManager.LoadScene("FurigomaScene");
     }
 }
