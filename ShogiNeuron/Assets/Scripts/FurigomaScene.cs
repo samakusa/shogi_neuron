@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class FurigomaScene : MonoBehaviour {
 
@@ -35,5 +36,13 @@ public class FurigomaScene : MonoBehaviour {
         else {
             // Assert(true);
         }
+    }
+
+    public void Back() {
+        SceneManager.LoadScene("UtilityScene");
+    }
+
+    public void BackTitle() {
+        SceneManager.LoadScene("TitleScene");
     }
 }

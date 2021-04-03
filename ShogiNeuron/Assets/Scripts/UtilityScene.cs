@@ -15,4 +15,8 @@ public class UtilityScene : MonoBehaviour {
     public void Furigoma() {
         SceneManager.LoadScene("FurigomaScene");
     }
+
+    public void Back() {
+        SceneManager.LoadScene("TitleScene");
+    }
 }

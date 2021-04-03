@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class BoardScene : MonoBehaviour {
     public GameObject Canvas;
@@ -174,5 +174,9 @@ public class BoardScene : MonoBehaviour {
 
     public void SetPieceSelected(GameObject piece) {
         this.PieceSelected = piece;
+    }
+
+    public void Back() {
+        SceneManager.LoadScene("TitleScene");
     }
 }
